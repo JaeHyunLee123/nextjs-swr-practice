@@ -1,5 +1,6 @@
 import React from "react";
 import useSWR from "swr";
+import { isLineBreak } from "typescript";
 
 interface IDogVideo {
   url: string;
@@ -11,7 +12,11 @@ export default () => {
     "https://dogs-api.nomadcoders.workers.dev"
   );
 
-  console.log(data);
+  const toggleLiked = () => {
+    if (data) {
+      mutate({ ...data, isLiked: !data.isLiked }, false);
+    }
+  };
 
   return (
     <div className="p-10 bg-slate-800 h-screen">
@@ -30,8 +35,11 @@ export default () => {
             >
               New Dog!
             </button>
-            <button className="cursor-pointer text-white bg-blue-400 rounded py-2 w-5/12">
-              Like
+            <button
+              className="cursor-pointer text-white bg-blue-400 rounded py-2 w-5/12"
+              onClick={toggleLiked}
+            >
+              {data?.isLiked ? "Unlike" : "Like"}
             </button>
           </div>
         </div>
