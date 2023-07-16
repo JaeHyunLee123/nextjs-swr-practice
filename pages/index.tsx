@@ -7,7 +7,7 @@ interface IDogVideo {
 }
 
 export default () => {
-  const { data, isValidating } = useSWR<IDogVideo>(
+  const { data, isValidating, mutate } = useSWR<IDogVideo>(
     "https://dogs-api.nomadcoders.workers.dev"
   );
 
@@ -22,7 +22,12 @@ export default () => {
         <div className="flex flex-col justify-center items-center bg-slate-700 w-full rounded py-5 space-y-5">
           <video className="h-[400px] max-w-full" src={data?.url} />
           <div className="flex justify-center items-center w-full space-x-5">
-            <button className="cursor-pointer bg-white rounded py-2 w-5/12">
+            <button
+              className="cursor-pointer bg-white rounded py-2 w-5/12"
+              onClick={() => {
+                mutate();
+              }}
+            >
               New Dog!
             </button>
             <button className="cursor-pointer text-white bg-blue-400 rounded py-2 w-5/12">
