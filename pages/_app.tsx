@@ -1,5 +1,5 @@
 import { SWRConfig } from "swr";
-import Head from "next/head";
+import "../styles/globals.css";
 
 export default function App({ Component, pageProps }: any) {
   return (
@@ -9,15 +9,7 @@ export default function App({ Component, pageProps }: any) {
           fetch(url).then((response) => response.json()),
       }}
     >
-      <>
-        <Head>
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.min.css"
-          />
-        </Head>
-        <Component {...pageProps} />
-      </>
+      <Component {...pageProps} />
     </SWRConfig>
   );
 }
